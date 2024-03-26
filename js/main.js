@@ -33,22 +33,24 @@ function showTasksList() {
 
   clearAllTasksBtn.disabled = false
   tasksList.style.border = "1px solid rgba(34,36,38,.15)"
-  list.reverse().forEach(task => {
-    const element = String.raw`
-				<li class="ui segment grid equal width">
-					<div class="ui checkbox column">
-						<input type="checkbox" ${task.completed ? "checked" : ""}>
-						<label>${task.text}</label>
-					</div>
-					<div class="column">
-						<i data-id="${task.id}" class="edit outline icon"></i>
-						<i data-id="${task.id}" class="trash alternate outline remove icon"></i>
-					</div>
-				</li>
-			`
 
-    tasksList.insertAdjacentHTML("beforeend", element)
-  })
+  list.reverse().forEach(task => {
+    const element = `
+      <li class="ui segment grid">
+        <div class="eight wide column">
+          <div class="ui checkbox">
+            <input type="checkbox" ${task.completed ? "checked" : ""}>
+            <label>${task.text}</label>
+          </div>
+        </div>
+        <div class="eight wide column right aligned">
+          <i data-id="${task.id}" class="edit outline icon"></i>
+          <i data-id="${task.id}" class="trash alternate outline remove icon"></i>
+        </div>
+      </li>
+    `;
+    tasksList.insertAdjacentHTML("beforeend", element);
+  });
 
   document.querySelectorAll(`li i.edit`).forEach(item => {
     item.addEventListener("click", e => {
